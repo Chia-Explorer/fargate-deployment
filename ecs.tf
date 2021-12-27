@@ -27,7 +27,7 @@ resource "aws_ecs_task_definition" "this" {
       options = {
         awslogs-region        = var.region
         awslogs-stream-prefix = "ecs"
-        awslogs-group         = "/ecs/${var.service_name}"
+        awslogs-group         = local.log_group_name
       }
     }
     secrets = var.secrets
