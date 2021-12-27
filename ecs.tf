@@ -10,8 +10,8 @@ resource "aws_ecs_task_definition" "this" {
 
   network_mode = "awsvpc"
 
-  execution_role_arn = data.aws_iam_role.task_execution_role.arn
-  task_role_arn      = data.aws_iam_role.task_role.arn
+  execution_role_arn = var.task_execution_role_arn
+  task_role_arn      = var.task_role_arn
 
   container_definitions = jsonencode([{
     name        = local.container_name
@@ -51,7 +51,7 @@ resource "aws_ecs_service" "this" {
   }
 
   load_balancer {
-    target_group_arn = aws_lb_target_group.ecs.arn
+    target_group_arn = aws_lb_target_group.this.arn
     container_name   = local.container_name
     container_port   = var.container_port
   }
