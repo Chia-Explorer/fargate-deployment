@@ -6,7 +6,7 @@ DNS records can be created in Cloudflare and logs are sent to CloudWatch.
 
 It is assumed that TLS will be handled by Cloudflare which is much simpler than managing certificates and DNS records in AWS. (having to create certs in ACM, verify identity, etc)
 
-## Cloudflare credentials
+## Cloudflare
 
 You must provide an API token for Cloudflare. This allows you to reduce permission down to only the zone that we are creating.
 
