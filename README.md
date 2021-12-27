@@ -10,4 +10,4 @@ It is assumed that TLS will be handled by Cloudflare which is much simpler than 
 
 You must provide an API token for Cloudflare. This allows you to reduce permission down to only the zone that we are creating.
 
-There is a slight chicken and egg situation as the Terraform is creating the zone, so you will first have to use a more permissive API token and then downgrade to one that is limited to only the zone we have created.
+You must already have a zone created in Cloudflare. This is because the responsibility of creating the zone should not belong to this module; for example some other Terraform code somewhere else may also be adding DNS records which you would not want to be deleted by this module.
