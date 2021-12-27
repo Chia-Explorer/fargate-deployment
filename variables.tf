@@ -3,9 +3,19 @@ variable "region" {
   description = "AWS region to deploy infra into"
 }
 
+variable "vpc_id" {
+  type        = string
+  description = "ID of VPC which we are deploying into"
+}
+
 variable "service_name" {
   type        = string
   description = "Name of this service"
+}
+
+variable "health_check_path" {
+  type        = string
+  description = "Path to HTTP endpoint for healthcheck. e.g. /health"
 }
 
 variable "task_count" {
@@ -26,6 +36,16 @@ variable "cpu" {
 variable "memory" {
   type        = number
   description = "Memory for task"
+}
+
+variable "deployment_maximum_percent" {
+  type        = number
+  description = "Allows e.g. 4 tasks while the target is 2 to get the 2 extra healthy before switching to them"
+}
+
+variable "deployment_minimum_healthy_percent" {
+  type        = number
+  description = "The desired count that must always be running"
 }
 
 variable "image" {
