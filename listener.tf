@@ -1,5 +1,5 @@
 resource "aws_lb_target_group" "this" {
-  name        = "${var.service_name}-target-group"
+  name        = "${var.service_name}-tg"
   port        = var.container_port
   protocol    = "HTTP"
   target_type = "ip"
