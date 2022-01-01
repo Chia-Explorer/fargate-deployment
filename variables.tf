@@ -94,6 +94,6 @@ variable "cloudflare_zone" {
 }
 
 variable "cloudflare_dns_records" {
-  type        = list(object({ type = string, name = string, value = string, ttl = number }))
+  type        = list(object({ type = string, name = string, value = string, ttl = number, proxied = bool }))
   description = "DNS records to create in CloudFlare. You likely want at least one that points to the ALB."
 }

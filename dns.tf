@@ -9,4 +9,5 @@ resource "cloudflare_record" "this" {
   name    = var.cloudflare_dns_records[count.index].name
   value   = var.cloudflare_dns_records[count.index].value
   ttl     = var.cloudflare_dns_records[count.index].ttl
+  proxied = var.cloudflare_dns_records[count.index].proxied
 }
