@@ -97,3 +97,13 @@ variable "cloudflare_dns_records" {
   type        = list(object({ type = string, name = string, value = string, ttl = number, proxied = bool }))
   description = "DNS records to create in CloudFlare. You likely want at least one that points to the ALB."
 }
+
+variable "health_check_interval" {
+  type        = number
+  description = "Number of seconds between each health check"
+}
+
+variable "health_check_healthy_threshold" {
+  type        = number
+  description = "Number of healthchecks in a row required to be healthy"
+}
