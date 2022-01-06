@@ -107,3 +107,8 @@ variable "health_check_healthy_threshold" {
   type        = number
   description = "Number of healthchecks in a row required to be healthy"
 }
+
+variable "assign_public_ip" {
+  type        = bool
+  description = "Whether to assign a public IP to containers"
+}
