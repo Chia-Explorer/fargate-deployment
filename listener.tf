@@ -40,7 +40,7 @@ resource "aws_lb_listener" "this_https" {
   ssl_policy        = "ELBSecurityPolicy-2016-08"
   # not ideal for this to be hardcoded but saving time for now
   # beware, this exists in chiaexplorer-terraform so could be accidently deleted from there...
-  certificate_arn   = "arn:aws:acm:us-west-2:115927355422:certificate/40811309-5c9c-45aa-af5e-f71622b3a413"
+  certificate_arn   = var.certificate_arn
 
   default_action {
     type             = "forward"

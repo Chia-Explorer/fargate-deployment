@@ -118,3 +118,9 @@ variable "https" {
   description = "Whether to use https"
   default     = false
 }
+
+variable "certificate_arn" {
+  type        = string
+  description = "certificate arn if using https"
+  default     = ""
+}
