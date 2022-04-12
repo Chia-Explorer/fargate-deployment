@@ -1,7 +1,7 @@
 resource "aws_lb_target_group" "this" {
   name        = "${var.service_name}-tg"
   port        = var.container_port
-  protocol    = "HTTP"
+  protocol    = var.https ? "HTTPS" : "HTTP"
   target_type = "ip"
   vpc_id      = var.vpc_id
 
@@ -13,12 +13,34 @@ resource "aws_lb_target_group" "this" {
   }
 }
 
-resource "aws_lb_listener" "this" {
+resource "aws_lb_listener" "this_http" {
+  count = var.https ? 0 : 1
+
   load_balancer_arn = var.alb_arn
 
-  # We let CloudFlare handle TLS which can simplify the AWS infra a bit
+  # Let cloudflare handle all HTTPS
   port     = "80"
   protocol = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.this.arn
+  }
+}
+
+resource "aws_lb_listener" "this_https" {
+  count = var.https ? 1 : 0
+
+  load_balancer_arn = var.alb_arn
+
+  # Full encryption between cloudflare and AWS
+  port     = "443"
+  protocol = "HTTPS"
+
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  # not ideal for this to be hardcoded but saving time for now
+  # beware, this exists in chiaexplorer-terraform so could be accidently deleted from there...
+  certificate_arn   = "arn:aws:acm:us-west-2:115927355422:certificate/40811309-5c9c-45aa-af5e-f71622b3a413"
 
   default_action {
     type             = "forward"

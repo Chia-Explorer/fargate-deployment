@@ -112,3 +112,9 @@ variable "assign_public_ip" {
   type        = bool
   description = "Whether to assign a public IP to containers"
 }
+
+variable "https" {
+  type        = bool
+  description = "Whether to use https"
+  default     = false
+}
